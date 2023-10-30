@@ -1,4 +1,4 @@
-# Type-It
+# Typit
 Touch typing tool for coders.
 
 **Finger Assignments**:
