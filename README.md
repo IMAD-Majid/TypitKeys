@@ -29,4 +29,4 @@ TypeIt helps you memorize these assignments to develop muscle memory.
 - Start typing.
 
 # Installation
-Use and install from [Typit](https://typit.netlify.app)
+Use and install from [Typit Trainer](https://typit-trainer.netlify.app)
