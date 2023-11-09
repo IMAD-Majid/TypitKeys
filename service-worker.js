@@ -1,4 +1,4 @@
-const CACHE_VERSION = "2023-10-30 8:10 PM";
+const CACHE_VERSION = "2023-10-30 12:15 PM";
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -9,7 +9,7 @@ self.addEventListener('install', (event) => {
         '/style.css',
         '/service-worker.js',
 
-        '/icon.svg',
+        '/icon.png',
         '/manifest.json',
 
         '/svg icons/*',
