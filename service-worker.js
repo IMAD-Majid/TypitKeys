@@ -1,9 +1,10 @@
-const CACHE_VERSION = "2023-11:15 3:30 PM";
+const CACHE_VERSION = "2023-11:15 5:00 PM";
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_VERSION).then((cache) => {
       return cache.addAll([
+        '/',
         '/index.html',
         '/style.css',
         '/service-worker.js',
