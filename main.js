@@ -90,7 +90,7 @@ for (let keyline of keyboardKeys) {
 	}
 	keyboardDiv.appendChild(line);
 }
-document.getElementById("Backspace").innerHTML = `<img src="svg icons/keyboard_backspace_black_24dp.svg">`;
+document.getElementById("Backspace").innerHTML = `<img src="svg icons/backspace_black_24dp.svg">`;
 document.getElementById("Space-bar").innerHTML = `<img src="svg icons/space_bar_black_24dp.svg">`;
 document.getElementById("Menu").innerHTML = `<img src="svg icons/menu_black_24dp.svg">`;
 document.getElementById("Enter1").innerHTML = `<img src="svg icons/keyboard_return_black_24dp.svg">`;

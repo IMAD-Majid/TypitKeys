@@ -1,10 +1,9 @@
-const CACHE_VERSION = "2023-10-30 12:15 PM";
+const CACHE_VERSION = "2023-11:15 3:30 PM";
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_VERSION).then((cache) => {
       return cache.addAll([
-        '/',
         '/index.html',
         '/style.css',
         '/service-worker.js',
@@ -12,7 +11,16 @@ self.addEventListener('install', (event) => {
         '/icon.png',
         '/manifest.json',
 
-        '/svg icons/*',
+        '/svg icons/kofi_stroke_cup.svg',
+        '/svg icons/grade_black_24dp.svg',
+        '/svg icons/backspace_black_24dp.svg',
+        '/svg icons/keyboard_capslock_black_24dp.svg',
+        '/svg icons/keyboard_return_black_24dp.svg',
+        '/svg icons/keyboard_tab_black_24dp.svg',
+        '/svg icons/menu_black_24dp.svg',
+        '/svg icons/space_bar_black_24dp.svg',
+        '/svg icons/speed_black_24dp.svg',
+        '/svg icons/window_black_24dp.svg',
       ])
     })
   );

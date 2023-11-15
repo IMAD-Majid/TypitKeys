@@ -6,6 +6,7 @@
 body {
 	max-width: 40em;
 	margin: 0 auto;
+	margin-top:1em;
 }
 
 h1 {
@@ -102,4 +103,8 @@ a {
 }
 a img{
 	margin-left:1em;
+	width: 36px;
+}
+img {
+	width:24px;
 }
