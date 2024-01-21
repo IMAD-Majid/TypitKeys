@@ -334,7 +334,10 @@ function cleanHTML(htmlcode) {
 async function generateSnippet() {
 	let snippet = 'cout << "Hello, world.";\nreturn 0;';
 	await fetch('https://codebeautify.org/api/random')
-		.then(response => response.json())
+		.then(response => {
+			console.log(response);
+			response.json();
+		})
 		.then(data => snippet = data.code)
 		.catch(error => {
 			console.error(error)
