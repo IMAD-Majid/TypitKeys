@@ -3,13 +3,6 @@ document.getElementById("to-type-container").style.display = 'none';
 document.getElementById("keyboard").style.display = 'none';
 document.querySelector("h1").style.display = 'none';
 
-const projectNames = [
-	"typit",
-	"makereadme",
-	"iwantlist",
-	"doropomo",
-	"usecasediagram"
-]
 var inputType;
 var curInput = '';
 var curLine = 0;
@@ -73,7 +66,7 @@ for (let keyline of keyboardKeys) {
 		let keySpan = document.createElement("span");
 		keySpan.textContent = k;
 		keySpan.setAttribute("id", k);
-		if (k == "\\1" || k == "\\2"){
+		if (k == "\\1" || k == "\\2") {
 			keySpan.style.backgroundColor = "#f88";
 		} else if (pinky.includes(k)) {
 			keySpan.style.backgroundColor = "#f88";
@@ -114,27 +107,27 @@ capsLock()
 const pressKeys = "`1234567890-=qwertyuiop[]asdfghjkl;\'\\zxcvbnm,./";
 const pressKeysShift = "~!@#$%^&*()_+{}:\"|<>?";
 
-function startApp(){
+function startApp() {
 	document.addEventListener("keydown", (e) => {
 		if (pressKeys.includes(e.key.toLowerCase()) || pressKeysShift.includes(e.key.toLowerCase())) {
 			if (e.shiftKey && !alphabetCapsLock.includes(e.key)) {
 				document.getElementById(keyShiftRe[e.key]).classList.add("pressed");
 			} else {
-				if (e.key == '\\'){
+				if (e.key == '\\') {
 					document.getElementById("\\1").classList.add("pressed");
 					document.getElementById("\\2").classList.add("pressed");
-				} else{
+				} else {
 					document.getElementById(e.key.toUpperCase()).classList.add("pressed");
 				}
 			}
-	
+
 			if (isCapsLocked) {
 				curInput += e.key;
 			} else {
 				curInput += e.key.toLowerCase();
 			}
 			updateInput()
-	
+
 		} else {
 			switch (e.key) {
 				case "CapsLock":
@@ -173,20 +166,20 @@ function startApp(){
 			}
 		}
 	})
-	
+
 	document.addEventListener("keyup", (e) => {
 		if (pressKeys.includes(e.key.toLowerCase()) || pressKeysShift.includes(e.key.toLowerCase())) {
 			if (e.shiftKey && !alphabetCapsLock.includes(e.key)) {
 				document.getElementById(keyShiftRe[e.key]).classList.remove("pressed");
 			} else {
-				if (e.key == '\\'){
+				if (e.key == '\\') {
 					document.getElementById("\\1").classList.remove("pressed");
 					document.getElementById("\\2").classList.remove("pressed");
-				} else{
+				} else {
 					document.getElementById(e.key.toUpperCase()).classList.remove("pressed");
 				}
 			}
-	
+
 		} else {
 			switch (e.key) {
 				case "CapsLock":
@@ -194,7 +187,7 @@ function startApp(){
 					capsLock();
 					document.getElementById("CapsLock").classList.remove("pressed");
 					break;
-	
+
 				case "Shift":
 					shiftPressed(false)
 					isCapsLocked = false;
@@ -218,11 +211,11 @@ function startApp(){
 			}
 		}
 	})
-	
+
 	document.getElementById("config").style.display = 'none';
 	document.querySelector("h1").style.display = '';
 	document.getElementById("to-type-container").style.display = '';
-	if (document.getElementById("show-keyboard").checked){
+	if (document.getElementById("show-keyboard").checked) {
 		document.getElementById("keyboard").style.display = '';
 	}
 	correctInput = ' ';
@@ -264,11 +257,12 @@ function capsLock() {
 }
 
 function updateInput() {
-	if (curLine >= correctInput.split("\n").length){
+	// UPDATE EACH PARAGRAPH
+	if (curLine >= correctInput.split("\n").length) {
 		readInputLine()
 		return;
 	}
-	if (curInput.length >= correctInput.split("\n")[curLine].length){
+	if (curInput.length >= correctInput.split("\n")[curLine].length) {
 		readInputLine();
 		return;
 	}
@@ -286,29 +280,30 @@ function updateInput() {
 	document.getElementById("to-type").children[curInput.length].className = "current";
 }
 
-function readInputLine() {
+async function readInputLine() {
 	curLine++;
-	if (curLine < correctInput.split("\n").length){
+	if (curLine < correctInput.split("\n").length) {
 		inputCount++;
 		calculatePerformance()
 		inputTimer = Date.now();
 	} else {
-		if (inputType == "None"){
+		if (inputType == "Basic") {
 			correctInput = generateParagraph();
-		} else{
-			correctInput = generateSnippet()
+		} else {
+			correctInput = await generateSnippet()
 		}
 		curLine = 0;
 	}
 	curInput = '';
+	console.log(correctInput);
 
-	for(var curLineIndex = 0, lineIndex = 0; lineIndex < correctInput.split("\n").slice(0, curLine).length; curLineIndex++, lineIndex++){
+	for (var curLineIndex = 0, lineIndex = 0; lineIndex < correctInput.split("\n").slice(0, curLine).length; curLineIndex++, lineIndex++) {
 		curLineIndex += correctInput.split("\n")[lineIndex].length;
 	};
-	
-	if (curLine + 2 >= correctInput.split("\n").length){
+
+	if (curLine + 2 >= correctInput.split("\n").length) {
 		displayInput = correctInput.slice(curLineIndex, correctInput.length);
-	} else{
+	} else {
 		displayInput = correctInput.slice(curLineIndex, Math.min(
 			curLineIndex +
 			correctInput.split("\n")[curLine].length + 1 +
@@ -320,7 +315,7 @@ function readInputLine() {
 	document.getElementById("to-type").innerHTML = '';
 	let newHTML = '';
 	for (let c of displayInput) {
-		if (c == '\n'){
+		if (c == '\n') {
 			newHTML += "<br>"
 			continue;
 		}
@@ -336,25 +331,32 @@ function cleanHTML(htmlcode) {
 	return d.innerHTML;
 }
 
-function generateSnippet() {
-	return document.getElementById(projectNames[parseInt(Math.random()*projectNames.length)]).textContent;
+async function generateSnippet() {
+	let snippet = 'cout << "Hello, world.";\nreturn 0;';
+	await fetch('https://code-snippets.com/api/random')
+		.then(response => response.json())
+		.then(data => snippet = data.code)
+		.catch(error => {
+			console.error(error)
+		});
+	return snippet;
 }
 
-function generateParagraph(){
+function generateParagraph() {
 	let par = '';
-	for (let i=0; i<6; i++){
+	for (let i = 0; i < 6; i++) {
 		par += generateSentence() + '\n';
 	}
 	return par.slice(0, par.length - 1);
 }
 
-function generateSentence(){
+function generateSentence() {
 	let gen = '';
 	const basicKeys = "asdfjkl;";
 	for (let i = 0; i < 30; i++) {
-		if (Math.random() > 0.5){
+		if (Math.random() > 0.5) {
 			gen += alphabetCapsLock[parseInt(Math.random() * alphabetCapsLock.length)].toLowerCase();
-		} else if (Math.random() < 0.4 && !["", " "].includes(gen[gen.length - 1]) && gen != ''){
+		} else if (Math.random() < 0.4 && !["", " "].includes(gen[gen.length - 1]) && gen != '' && i + 1 < 30) {
 			gen += ' ';
 		} else {
 			gen += basicKeys[parseInt(Math.random() * basicKeys.length)];
@@ -363,10 +365,10 @@ function generateSentence(){
 	return gen;
 }
 
-function calculatePerformance(){
+function calculatePerformance() {
 	let passedMinutes = ((Date.now() - inputTimer) / 1000) / 60;
 	accuracySum += document.querySelectorAll("span.correct").length / correctInput.split('\n')[curLine].length;
-	accuracy = (accuracySum*100) / inputCount;
+	accuracy = (accuracySum * 100) / inputCount;
 	LPMSum += curInput.length / passedMinutes;
 	LPM = LPMSum / inputCount;
 
