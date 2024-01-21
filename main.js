@@ -333,12 +333,12 @@ function cleanHTML(htmlcode) {
 
 async function generateSnippet() {
 	let snippet = 'cout << "Hello, world.";\nreturn 0;';
-	await fetch('https://coderbyte.com/api/challenges/random')
+	await fetch('https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=activity&site=stackoverflow&tagged=javascript')
 		.then(response => {
 			console.log(response);
 			response.json();
 		})
-		.then(data => snippet = data.code)
+		.then(data => snippet = data.items[0].body)
 		.catch(error => {
 			console.error(error)
 		});
