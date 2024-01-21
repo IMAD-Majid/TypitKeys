@@ -3,7 +3,6 @@ document.getElementById("to-type-container").style.display = 'none';
 document.getElementById("keyboard").style.display = 'none';
 document.querySelector("h1").style.display = 'none';
 
-var inputType;
 var curInput = '';
 var curLine = 0;
 
@@ -221,7 +220,6 @@ function startApp() {
 	correctInput = ' ';
 	curLine = 999;
 	inputTimer = Date.now();
-	inputType = document.querySelector("select").value;
 	readInputLine();
 }
 
@@ -258,6 +256,10 @@ function capsLock() {
 
 function updateInput() {
 	// UPDATE EACH PARAGRAPH
+	inputCount = 0;
+	accuracySum = 0;
+	LPMSum = 0;
+
 	if (curLine >= correctInput.split("\n").length) {
 		readInputLine()
 		return;
@@ -280,22 +282,17 @@ function updateInput() {
 	document.getElementById("to-type").children[curInput.length].className = "current";
 }
 
-async function readInputLine() {
+function readInputLine() {
 	curLine++;
 	if (curLine < correctInput.split("\n").length) {
 		inputCount++;
 		calculatePerformance()
 		inputTimer = Date.now();
 	} else {
-		if (inputType == "Basic") {
-			correctInput = generateParagraph();
-		} else {
-			correctInput = await generateSnippet()
-		}
+		correctInput = generateParagraph();
 		curLine = 0;
 	}
 	curInput = '';
-	console.log(correctInput);
 
 	for (var curLineIndex = 0, lineIndex = 0; lineIndex < correctInput.split("\n").slice(0, curLine).length; curLineIndex++, lineIndex++) {
 		curLineIndex += correctInput.split("\n")[lineIndex].length;
@@ -329,20 +326,6 @@ function cleanHTML(htmlcode) {
 	let d = document.createElement("div");
 	d.textContent = htmlcode;
 	return d.innerHTML;
-}
-
-async function generateSnippet() {
-	let snippet = 'cout << "Hello, world.";\nreturn 0;';
-	await fetch('https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=activity&site=stackoverflow&tagged=javascript')
-		.then(response => {
-			console.log(response);
-			response.json();
-		})
-		.then(data => snippet = data.items[0].body)
-		.catch(error => {
-			console.error(error)
-		});
-	return snippet;
 }
 
 function generateParagraph() {

@@ -6,18 +6,11 @@
 body {
 	max-width: 40em;
 	margin: 0 auto;
-	margin-top:1em;
+	margin-top:0.5em;
 }
 
 h1 {
 	text-align: center;
-}
-
-select {
-	display:block;
-	margin:1em 0;
-	padding:1em;
-	width:100%;
 }
 
 button {
@@ -98,11 +91,10 @@ pre#to-type {
 a {
 	text-decoration: none;
 	display: flex;
-
+	margin-bottom: 2em;
 	color:black;
 }
 a img{
-	margin-left:1em;
 	width: 36px;
 }
 img {
