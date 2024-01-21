@@ -333,7 +333,7 @@ function cleanHTML(htmlcode) {
 
 async function generateSnippet() {
 	let snippet = 'cout << "Hello, world.";\nreturn 0;';
-	await fetch('https://codebeautify.org/api/random')
+	await fetch('https://coderbyte.com/api/challenges/random')
 		.then(response => {
 			console.log(response);
 			response.json();
