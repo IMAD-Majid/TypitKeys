@@ -1,74 +1,81 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <title>Pinkython</title>
+        <link rel="icon" type="image/png" href="icon.png" />
+        <link rel="manifest" href="manifest.json" />
+        <link rel="stylesheet" href="style.css" />
+    </head>
 
-<head>
-    <title>Typit</title>
-    <link rel="icon" type="image/png" href="icon.png">
-    <link rel="manifest" href="manifest.json" />
-    <link rel="stylesheet" href="style.css">
-</head>
+    <body>
+        <a href="https://github.com/ssiyo/pinkython" target="_blank">
+            <img src="svg/build_24dp.svg" />
+        </a>
 
-<body>
-    <a href="https://github.com/IMAD-Majid" target="_blank">
-        <img src="svg icons/kofi_stroke_cup.svg">
-    </a>
+        <div id="config">
+            <input id="show-keyboard" type="checkbox" checked />
+            <label for="show-keyboard">Show keyboard</label>
 
-    <div id="config">
-        <input id="show-keyboard" type="checkbox" checked>
-        <label for="show-keyboard">Show keyboard</label>
+            <br /><br />
+            <span>Each finger is responsible for specific keys.</span>
+            <br />
+            <span>Finger Assignments:</span>
+            <ul>
+                <li>Left pinky: A</li>
+                <li>Left ring finger: S</li>
+                <li>Left middle finger: D</li>
+                <li>Left index finger: F</li>
+                <li>Right index finger: J</li>
+                <li>Right middle finger: K</li>
+                <li>Right ring finger: L</li>
+                <li>Right pinky: ;</li>
+            </ul>
 
-        <br><br>
-        <span>Each finger is responsible for specific keys.</span>
-        <br>
-        <span>Finger Assignments:</span>
-        <ul>
-            <li>Left pinky: A</li>
-            <li>Left ring finger: S</li>
-            <li>Left middle finger: D</li>
-            <li>Left index finger: F</li>
-            <li>Right index finger: J</li>
-            <li>Right middle finger: K</li>
-            <li>Right ring finger: L</li>
-            <li>Right pinky: ; </li>
-        </ul>
+            <span>Typing Posture:</span>
+            <ul>
+                <li>Sit up straight with your feet flat on the floor.</li>
+                <li>
+                    Maintain a comfortable distance from the keyboard and
+                    monitor.
+                </li>
+                <li>
+                    Keep your fingers relaxed and avoid excessive force when
+                    pressing keys.
+                </li>
+            </ul>
 
+            <button onclick="startApp()">RUN</button>
+        </div>
 
+        <h1 title="Letters per minute speed | Accuracy" style="display: none">
+            <img src="svg/speed_black_24dp.svg" />
+            <span id="speed">0</span> LPM |
+            <img src="svg/grade_black_24dp.svg" />
+            <span id="accuracy">0</span>%
+        </h1>
 
-        <span>Typing Posture:</span>
-        <ul>
-            <li>Sit up straight with your feet flat on the floor.</li>
-            <li>Maintain a comfortable distance from the keyboard and monitor.</li>
-            <li>Keep your fingers relaxed and avoid excessive force when pressing keys.</li>
-        </ul>
-
-        <button onclick="startApp()">Typit</button>
-    </div>
-
-    <h1 title="Letters per minute speed | Accuracy" style="display: none;">
-        <img src="svg icons/speed_black_24dp.svg">
-        <span id="speed">0</span> LPM
-        |
-        <img src="svg icons/grade_black_24dp.svg">
-        <span id="accuracy">0</span>%
-    </h1>
-
-    <div id="to-type-container">
-        <pre id="to-type"></pre>
-    </div>
-    <div id="keyboard">
-    </div>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js')
-                .then((registration) => {
-                    console.log('Service Worker registered with scope:', registration.scope);
-                })
-                .catch((error) => {
-                    console.error('Service Worker registration failed:', error);
-                });
-        }
-    </script>
-    <script src="main.js"></script>
-</body>
-
+        <div id="to-type-container">
+            <pre id="to-type"></pre>
+        </div>
+        <div id="keyboard"></div>
+        <script>
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker
+                    .register("/sw.js")
+                    .then((registration) => {
+                        console.log(
+                            "Service Worker registered with scope:",
+                            registration.scope
+                        );
+                    })
+                    .catch((error) => {
+                        console.error(
+                            "Service Worker registration failed:",
+                            error
+                        );
+                    });
+            }
+        </script>
+        <script src="main.js"></script>
+    </body>
 </html>

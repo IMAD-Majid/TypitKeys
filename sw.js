@@ -1,4 +1,4 @@
-const CACHE_VERSION = "2024-01-21 01:00 PM";
+const CACHE_VERSION = "2024-06-12 08:20 PM";
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -13,16 +13,16 @@ self.addEventListener('install', (event) => {
         '/icon.png',
         '/manifest.json',
 
-        '/svg icons/kofi_stroke_cup.svg',
-        '/svg icons/grade_black_24dp.svg',
-        '/svg icons/backspace_black_24dp.svg',
-        '/svg icons/keyboard_capslock_black_24dp.svg',
-        '/svg icons/keyboard_return_black_24dp.svg',
-        '/svg icons/keyboard_tab_black_24dp.svg',
-        '/svg icons/menu_black_24dp.svg',
-        '/svg icons/space_bar_black_24dp.svg',
-        '/svg icons/speed_black_24dp.svg',
-        '/svg icons/window_black_24dp.svg',
+        '/svg/kofi_stroke_cup.svg',
+        '/svg/grade_black_24dp.svg',
+        '/svg/backspace_black_24dp.svg',
+        '/svg/keyboard_capslock_black_24dp.svg',
+        '/svg/keyboard_return_black_24dp.svg',
+        '/svg/keyboard_tab_black_24dp.svg',
+        '/svg/menu_black_24dp.svg',
+        '/svg/space_bar_black_24dp.svg',
+        '/svg/speed_black_24dp.svg',
+        '/svg/window_black_24dp.svg',
       ])
     })
   );
